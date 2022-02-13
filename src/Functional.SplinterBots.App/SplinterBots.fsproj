@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+
+        <PublishSingleFile>true</PublishSingleFile>
+        <PublishTrimmed>true</PublishTrimmed>
+
+
+        <UserSecretsId>4f83c705-a549-4f1d-acee-277f3e517705</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="FunctionalGui.fs" />
+        <Compile Include="DefaultValues.fs" />
+        <Compile Include="Top.fs" />
+        <Compile Include="ApplicationUpdater.fs" />
+        <Compile Include="BackgroundWorker.fs" />
+        <Compile Include="ApplicationLog.fs" />
+        <Compile Include="BotDetailsView.fs" />
+        <Compile Include="BotsWindow.fs" />
+        <Compile Include="ConfigurationWindow.fs" />
+        <Compile Include="AccountsWindow.fs" />
+        <Compile Include="Toolbars.fs" />
+        <Compile Include="Program.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="cards-example.yml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="accounts-example.yml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="config.yml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="version.info">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Cronos" Version="0.7.1" />
+        <PackageReference Include="FSharp.Configuration" Version="2.0.0" />
+        <PackageReference Include="FSharp.Control.Reactive" Version="5.0.2" />
+        <PackageReference Include="Functional.SplinterBots.API" Version="1.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
+        <PackageReference Include="Terminal.Gui" Version="1.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Functional.SplinterBots.Core\Functional.SplinterBots.Core.fsproj" />
+        <ProjectReference Include="..\Functional.SplinterBots.Storage\Functional.SplinterBots.Storage.fsproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Update="FSharp.Core" Version="6.0.3" />
+    </ItemGroup>
+
+</Project>

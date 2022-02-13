@@ -1,0 +1,10 @@
+﻿{
+  "TrainingTime": 0,
+  "Scenario": "Recommendation",
+  "Environment": {
+    "Type": "LocalCPU",
+    "Version": 1
+  },
+  "Type": "TrainingConfig",
+  "Version": 1
+}

@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Status.fs" />
+        <Compile Include="SplinterlandConfig.fs" />
+        <Compile Include="SplinterBotsMath.fs" />
+        <Compile Include="Defaults.fs" />
+        <Compile Include="ExecutionContext.fs" />
+        <Compile Include="Splinerland.fs" />
+        <Compile Include="DEC.fs" />
+        <Compile Include="SPS.fs" />
+        <Compile Include="Cards\Cards.fs" />
+        <Compile Include="Cards\BuyCardsForCredits.fs" />
+        <Compile Include="Cards\RentSelectedCards.fs" />
+        <Compile Include="Cards\RentCardsWithDec.fs" />
+        <Compile Include="AccountDetails.fs" />
+        <Compile Include="Rewards.fs" />
+        <Compile Include="SplinterBots.Actions.fs" />
+        <Compile Include="SplinterBots.Messages.fs" />
+        <Compile Include="SplinterBots.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FSharp.Json" Version="0.4.1" />
+        <PackageReference Include="Functional.SplinterBots.API" Version="1.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
+        <PackageReference Include="NetEscapades.Configuration.Yaml" Version="2.1.0" />
+        <PackageReference Include="Functional.SplinterBots.API" Version="1.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="FSharp.Core" Version="6.0.3" />
+    </ItemGroup>
+</Project>
