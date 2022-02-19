@@ -33,8 +33,7 @@ Target.create "Build" (fun _ ->
 
 let publishOptions (options: DotNet.PublishOptions) = 
     { 
-        options with 
-            //OutputPath = Some "./artifacts/win/";
+        options with
             Runtime = Some runtime;
             Configuration = DotNet.BuildConfiguration.Release;
             SelfContained = Some true;            
