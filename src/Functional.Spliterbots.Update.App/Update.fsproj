@@ -4,10 +4,12 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
 
-        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-        <PublishSingleFile>true</PublishSingleFile>
         <SelfContained>true</SelfContained>
+        <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+        <PublishSingleFile>true</PublishSingleFile>
+        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
         <PublishTrimmed>true</PublishTrimmed>
+        <PublishReadyToRun>true</PublishReadyToRun>
 
         <UserSecretsId>4f83c705-a549-4f1d-acee-277f3e517705</UserSecretsId>
     </PropertyGroup>

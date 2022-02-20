@@ -6,6 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Version.fs" />
+        <Compile Include="GitHubReleaseUpdate.fs" />
         <Compile Include="Status.fs" />
         <Compile Include="SplinterlandConfig.fs" />
         <Compile Include="SplinterBotsMath.fs" />
@@ -35,7 +37,7 @@
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
         <PackageReference Include="NetEscapades.Configuration.Yaml" Version="2.1.0" />
-        <PackageReference Include="Functional.SplinterBots.API" Version="1.0.2" />
+        <PackageReference Include="Functional.SplinterBots.API" Version="1.1.0" />
     </ItemGroup>
 
     <ItemGroup>

@@ -36,8 +36,7 @@ let publishOptions (options: DotNet.PublishOptions) =
         options with
             Runtime = Some runtime;
             Configuration = DotNet.BuildConfiguration.Release;
-            SelfContained = Some true;            
-            MSBuildParams = { MSBuild.CliArguments.Create() with Properties = ["EnableCompressionInSingleFile", "true"] }
+            SelfContained = Some true;
     }
 Target.create "PublishDotnet" (fun _ ->
     !! "src/*.App/*.*proj"
@@ -48,7 +47,8 @@ Target.create "PublishDotnet" (fun _ ->
         -- "src/*.App/**/publish/*.pdb"
         -- "src/*.App/**/publish/*.xml"
         -- "src/*.App/**/publish/*.json"
-        -- "src/*.App/**/publish/createdump.exe"        
+        -- "src/*.App/**/publish/createdump.exe"
+        ++ "src/*.App/**/publish/../*.so"
         |> Array.ofSeq
     let directory = $"./temp/{runtime}"
 
