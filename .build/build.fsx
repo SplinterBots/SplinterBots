@@ -27,8 +27,14 @@ Target.create "Clean" (fun _ ->
 )
 
 Target.create "Build" (fun _ ->
+    let buildOptions (options: DotNet.BuildOptions) = 
+        {
+            options with
+                Runtime = Some runtime;
+                Configuration = DotNet.BuildConfiguration.Release;
+        }
     !! "src/**/*.fsproj"
-    |> Seq.iter (DotNet.build id)
+    |> Seq.iter (DotNet.build buildOptions)
 )
 
 let publishOptions (options: DotNet.PublishOptions) = 
