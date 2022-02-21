@@ -58,7 +58,7 @@ stages:
           - task: GitHubRelease@1
             inputs:
               gitHubConnection: 'github.com_Assassyn'
-              repositoryName: 'functional-solutions/splinterbots'
+              repositoryName: 'SplinterBots/splinterbots'
               action: 'create'
               target: '$(Build.SourceVersion)'
               tagSource: 'userSpecifiedTag'
