@@ -16,6 +16,7 @@
         <Compile Include="Splinerland.fs" />
         <Compile Include="DEC.fs" />
         <Compile Include="SPS.fs" />
+        <Compile Include="Cards\TransferCardsToMainAccount.fs" />
         <Compile Include="Cards\Cards.fs" />
         <Compile Include="Cards\BuyCardsForCredits.fs" />
         <Compile Include="Cards\RentSelectedCards.fs" />
