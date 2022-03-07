@@ -6,6 +6,7 @@ module SplinterBots =
     open Actions
 
     let getAccountDetails log getToken config =
+        let report = Messages.report log
         let getAccountDetail  =
             [
                 Messages.reportStartProcessing log
@@ -16,25 +17,25 @@ module SplinterBots =
                 Splinterland.settings
                 AccountDetails.getAccountDetails
 
-                Messages.report log ClaimDailyReward
-                Actions.ensureOperationIsAllowed
-                    config.claimDailyReward
-                    Rewards.claimDailyChest
-                        >>~ (Messages.reportDailyChestRewards log)
+                //report ClaimDailyReward
+                //Actions.ensureOperationIsAllowed
+                //    config.claimDailyReward
+                //    Rewards.claimDailyChest
+                //        >>~ (Messages.reportDailyChestRewards log)
 
-                Messages.report log ClaimSeasonReward
-                Actions.ensureOperationIsAllowed
-                    config.claimSeasonReward
-                    Rewards.claimSeasonChests
-                        >>~ (Messages.reportSeasonChestRewards log)
+                //report ClaimSeasonReward
+                //Actions.ensureOperationIsAllowed
+                //    config.claimSeasonReward
+                //    Rewards.claimSeasonChests
+                //        >>~ (Messages.reportSeasonChestRewards log)
 
-                Actions.ensureOperationIsAllowed
-                    config.rentCards
-                    (Cards.RentSelectedCards.rentCardsSelectedByUser config.cards)
-                        >>~ (Messages.report log RentingCardsToFillPower)
-                        >>~ (Messages.report log RentingCardsToFillPower)
-                        >>~ (Cards.RentCardsWithDec.rentCardsToReachPower (config.desiredLeague |> SplinterlandLeague.leaugeToPower))
-                        >>~ (Messages.report log CardsRented)
+                //Actions.ensureOperationIsAllowed
+                //    config.rentCards
+                //    (Cards.RentSelectedCards.rentCardsSelectedByUser config.cards)
+                //        >>~ (report RentingCardsToFillPower)
+                //        >>~ (report RentingCardsToFillPower)
+                //        >>~ (Cards.RentCardsWithDec.rentCardsToReachPower (config.desiredLeague |> SplinterlandLeague.leaugeToPower))
+                //        >>~ (report CardsRented)
                 
                 Splinterland.settings
                 AccountDetails.getAccountDetails
@@ -44,6 +45,7 @@ module SplinterBots =
         Actions.executeActions log getToken config getAccountDetail
 
     let claimDaily log getToken config =
+        let report = Messages.report log
         let getAccountDetail  =
             [
                 Messages.reportStartProcessing log
@@ -54,23 +56,28 @@ module SplinterBots =
                 Splinterland.settings
                 AccountDetails.getAccountDetails
 
-                Messages.report log DonateDec
-                DEC.donateDec
-                Messages.reportLastTransfer log DecDonated
-                DEC.transferDecToMainAccount config.decLimit
-                Messages.reportLastTransfer log DecTransfered
+                //report DonateDec
+                //DEC.donateDec
+                //Messages.reportLastTransfer log DecDonated
+                //DEC.transferDecToMainAccount config.decLimit
+                //Messages.reportLastTransfer log DecTransfered
 
-                Messages.report log BuyCardWithCredtis
-                Cards.BuyForCredits.buyCheapestCardOnMarketWithCredits
+                //report BuyCardWithCredtis
+                //Cards.BuyForCredits.buyCheapestCardOnMarketWithCredits
 
-                Messages.report log ClaimSPS
-                SPS.claimSps
-                AccountDetails.getAccountDetails
-                Messages.report log DonateSps
-                SPS.donateSps
-                Messages.reportLastTransfer log SpsDonated
-                SPS.transferSPSToMainAccount
-                Messages.reportLastTransfer log SpsTransfered
+                Actions.ensureOperationIsAllowed
+                    config.transferCardsToMainAccount
+                    (report TransferCardsToMainAccount)
+                        >>~ (Cards.TransferCardsToMainAccount.sentCardsToMainAccount)
+
+                //report ClaimSPS
+                //SPS.claimSps
+                //AccountDetails.getAccountDetails
+                //report DonateSps
+                //SPS.donateSps
+                //Messages.reportLastTransfer log SpsDonated
+                //SPS.transferSPSToMainAccount
+                //Messages.reportLastTransfer log SpsTransfered
 
                 Splinterland.settings
                 AccountDetails.getAccountDetails

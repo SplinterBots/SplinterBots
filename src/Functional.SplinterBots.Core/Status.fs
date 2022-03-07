@@ -134,6 +134,8 @@ module Status =
         | RentingCardsToFillPower
         | CardsRented
 
+        | TransferCardsToMainAccount
+
         | BuyCardWithCredtis
 
         | Processed of Username

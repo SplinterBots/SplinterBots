@@ -31,6 +31,7 @@ type ConfigurationWindow () as self =
         configFile.claimDailyReward <- claimDailyRewardCheckbox.Checked
         configFile.claimSeasonReward <- claimSessonalRewardCheckbox.Checked
         configFile.rentCards <- rentCardsCheckbox.Checked
+        configFile.transferCardsToMainAccount <- transferCardsCheckbox.Checked
         let executionTime = startTransferTime.Time
         configFile.timers.executeTransfer <- $"{executionTime.Minutes} {executionTime.Hours} * * *"
         configFile.decLimit <- float(decLimit.Text.ToString())
@@ -76,6 +77,7 @@ type ConfigurationWindow () as self =
         claimDailyRewardCheckbox |> setState config.claimDailyReward |> ignore
         claimSessonalRewardCheckbox |> setState config.claimSeasonReward |> ignore
         rentCardsCheckbox |> setState config.rentCards |> ignore
+        transferCardsCheckbox |> setState config.transferCardsToMainAccount |> ignore
         startTransferTime |> setTime (cronToTimeSpan config.timers.executeTransfer) |> ignore
         decLimit |> setText config.decLimit |> ignore
 
