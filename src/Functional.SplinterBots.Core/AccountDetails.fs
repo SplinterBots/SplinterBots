@@ -1,5 +1,8 @@
 ﻿namespace Functional.SplinterBots
 
+open Newtonsoft.Json.Linq
+open System
+
 module AccountDetails =
 
     open ExecutionContext
@@ -27,6 +30,7 @@ module AccountDetails =
         | Some x -> x
         | None -> defaultValue
 
+
     let getAccountDetails (context: Context) = 
         async {
             let username = context.playerName
@@ -34,7 +38,7 @@ module AccountDetails =
             let! playerDetails =  Details.getDetails username
             let! playerQuest =  Quest.getQuest username
             let! lastSeasonRewards = LastSeasonRewards.getLastSeasonRewards username
-            
+
             return 
                 { 
                     context with 

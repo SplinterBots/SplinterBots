@@ -37,6 +37,11 @@ module SplinterBots =
                 //        >>~ (Cards.RentCardsWithDec.rentCardsToReachPower (config.desiredLeague |> SplinterlandLeague.leaugeToPower))
                 //        >>~ (report CardsRented)
                 
+                Actions.ensureOperationIsAllowed
+                    config.transferCardsToMainAccount
+                    (report TransferCardsToMainAccount)
+                        >>~ (Cards.TransferCardsToMainAccount.sentCardsToMainAccount)
+                
                 Splinterland.settings
                 AccountDetails.getAccountDetails
                 Messages.reportAccountDetailas log
@@ -56,28 +61,23 @@ module SplinterBots =
                 Splinterland.settings
                 AccountDetails.getAccountDetails
 
-                //report DonateDec
-                //DEC.donateDec
-                //Messages.reportLastTransfer log DecDonated
-                //DEC.transferDecToMainAccount config.decLimit
-                //Messages.reportLastTransfer log DecTransfered
+                report DonateDec
+                DEC.donateDec
+                Messages.reportLastTransfer log DecDonated
+                DEC.transferDecToMainAccount config.decLimit
+                Messages.reportLastTransfer log DecTransfered
 
-                //report BuyCardWithCredtis
-                //Cards.BuyForCredits.buyCheapestCardOnMarketWithCredits
+                report BuyCardWithCredtis
+                Cards.BuyForCredits.buyCheapestCardOnMarketWithCredits
 
-                Actions.ensureOperationIsAllowed
-                    config.transferCardsToMainAccount
-                    (report TransferCardsToMainAccount)
-                        >>~ (Cards.TransferCardsToMainAccount.sentCardsToMainAccount)
-
-                //report ClaimSPS
-                //SPS.claimSps
-                //AccountDetails.getAccountDetails
-                //report DonateSps
-                //SPS.donateSps
-                //Messages.reportLastTransfer log SpsDonated
-                //SPS.transferSPSToMainAccount
-                //Messages.reportLastTransfer log SpsTransfered
+                report ClaimSPS
+                SPS.claimSps
+                AccountDetails.getAccountDetails
+                report DonateSps
+                SPS.donateSps
+                Messages.reportLastTransfer log SpsDonated
+                SPS.transferSPSToMainAccount
+                Messages.reportLastTransfer log SpsTransfered
 
                 Splinterland.settings
                 AccountDetails.getAccountDetails
