@@ -19,7 +19,7 @@ type ConfigurationWindow () as self =
     let decLimit = 
         createTextBox "" 
         |> setWidth (Dim.Sized 12) 
-        |> keepAtLine 5
+        |> moveToFixedLine 5
         |> allowNumberOnly
         |> limitCharactersTo 8
     let saveButton = createButton "Save"
@@ -46,29 +46,29 @@ type ConfigurationWindow () as self =
         Application.Top.Remove self
 
     do 
-        self.Add (claimDailyRewardCheckbox |> keepAtLine 0)
-        self.Add (claimSessonalRewardCheckbox |> keepAtLine 1)
-        self.Add (transferCardsCheckbox |> keepAtLine 2)
-        self.Add (rentCardsCheckbox |> keepAtLine 3)
+        self.Add (claimDailyRewardCheckbox |> moveToFixedLine 0)
+        self.Add (claimSessonalRewardCheckbox |> moveToFixedLine 1)
+        self.Add (transferCardsCheckbox |> moveToFixedLine 2)
+        self.Add (rentCardsCheckbox |> moveToFixedLine 3)
         self.Add (
             createLabel "Set start time of resources transfer:" 
-            |> keepAtLine 4 
+            |> moveToFixedLine 4 
             |> moveTo 15)
-        self.Add (startTransferTime |> keepAtLine 4)
+        self.Add (startTransferTime |> moveToFixedLine 4)
         self.Add decLimit
         self.Add (
             createLabel "Transfer DEC above this limit" 
-            |> keepAtLine 5 
+            |> moveToFixedLine 5 
             |> moveTo 15)
         self.Add (
             saveButton 
             |> addClick (save >> closeWindow)  
             |> setDefaultButton 
-            |> keepAtLine 8)
+            |> moveToFixedLine 8)
         self.Add (
             closeButton 
             |> addClick closeWindow 
-            |> keepAtLine 8
+            |> moveToFixedLine 8
             |> moveToRight saveButton)
 
     member this.Show () =

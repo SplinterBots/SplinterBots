@@ -91,6 +91,7 @@ module Status =
             }
         let bindLoading username =
             {loading with username = username }
+
     type ExecutionModes =
         | Claim
         | CheckDetails
@@ -126,7 +127,6 @@ module Status =
         | CardTransfered of CardId
 
         | StartedProcessing of Username
-        | Mode of ExecutionModes
 
         | LoadedAccountDetails of AccountDetail
 
