@@ -17,6 +17,7 @@ module Status =
         | Claimed
         | Unknown
 
+    [<Flags>]
     type SplinterlandLeague =
         | Novice = 0
         | Bronze_III = 1
@@ -36,7 +37,7 @@ module Status =
         | Champion_I = 15
 
     module SplinterlandLeague =
-        let leaugeToPower leauge =
+        let leaugeToPower (leauge: SplinterlandLeague) =
             match leauge with 
             | Novice -> 1000
             | Bronze_III -> 1000

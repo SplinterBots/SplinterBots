@@ -33,7 +33,7 @@ module RentCardsWithDec =
             let! cardsToBuy = cardGroup |> Market.getCardsDetailsFromMarket MarketAction.Rent
             let cardsToBuy = cardsToBuy |> Seq.head 
 
-            Market.rentCards (IdConverter.bindSingleId cardsToBuy.market_id) Currency.DEC daysToRentCards playerName activeKey
+            return Market.rentCards (IdConverter.bindSingleId cardsToBuy.market_id) Currency.DEC daysToRentCards playerName activeKey 
         }
     let rec private ensurePowerLimitIsReached desiredPowerLimit playerName activeKey = 
         async {
@@ -42,9 +42,11 @@ module RentCardsWithDec =
 
             if power <= desiredPowerLimit
             then
-                do! rentCard playerName activeKey
-                do! ensurePowerLimitIsReached desiredPowerLimit playerName activeKey
-            
+                let! transactionResult = rentCard playerName activeKey
+                
+                if(transactionResult = TransactionResult.FinishedOk)
+                then
+                    do! ensurePowerLimitIsReached desiredPowerLimit playerName activeKey
             return ()
         }
 
@@ -52,9 +54,9 @@ module RentCardsWithDec =
          async {
             let  dec = context.playerBalance.dec
 
-            
             if(dec > 10.0M)
             then 
                 do! ensurePowerLimitIsReached desiredPowerLimit context.playerName context.activeKey
+
             return context
          }

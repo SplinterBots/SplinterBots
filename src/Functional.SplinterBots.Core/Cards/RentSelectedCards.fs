@@ -51,7 +51,7 @@ module RentSelectedCards =
                     convertCardNameToCardIds (cardNames |> Array.ofSeq)
                     |> getCardGroupsFromMarket
                     |> getAvailableCards
-                Market.rentCards (IdConverter.bindMultipleCardsId cards) Currency.DEC daysToRentCards context.playerName context.activeKey
+                Market.rentCards (IdConverter.bindMultipleCardsId cards) Currency.DEC daysToRentCards context.playerName context.activeKey |> ignore
 
             return context
         }

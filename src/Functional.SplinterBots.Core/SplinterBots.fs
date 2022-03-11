@@ -17,25 +17,25 @@ module SplinterBots =
                 Splinterland.settings
                 AccountDetails.getAccountDetails
 
-                //report ClaimDailyReward
-                //Actions.ensureOperationIsAllowed
-                //    config.claimDailyReward
-                //    Rewards.claimDailyChest
-                //        >>~ (Messages.reportDailyChestRewards log)
+                report ClaimDailyReward
+                Actions.ensureOperationIsAllowed
+                    config.claimDailyReward
+                    Rewards.claimDailyChest
+                        >>~ (Messages.reportDailyChestRewards log)
 
-                //report ClaimSeasonReward
-                //Actions.ensureOperationIsAllowed
-                //    config.claimSeasonReward
-                //    Rewards.claimSeasonChests
-                //        >>~ (Messages.reportSeasonChestRewards log)
+                report ClaimSeasonReward
+                Actions.ensureOperationIsAllowed
+                    config.claimSeasonReward
+                    Rewards.claimSeasonChests
+                        >>~ (Messages.reportSeasonChestRewards log)
 
-                //Actions.ensureOperationIsAllowed
-                //    config.rentCards
-                //    (Cards.RentSelectedCards.rentCardsSelectedByUser config.cards)
-                //        >>~ (report RentingCardsToFillPower)
-                //        >>~ (report RentingCardsToFillPower)
-                //        >>~ (Cards.RentCardsWithDec.rentCardsToReachPower (config.desiredLeague |> SplinterlandLeague.leaugeToPower))
-                //        >>~ (report CardsRented)
+                Actions.ensureOperationIsAllowed
+                    config.rentCards
+                    (Cards.RentSelectedCards.rentCardsSelectedByUser config.cards)
+                        >>~ (report RentingCardsToFillPower)
+                        >>~ (report RentingCardsToFillPower)
+                        >>~ (Cards.RentCardsWithDec.rentCardsToReachPower (config.desiredLeague |> SplinterlandLeague.leaugeToPower))
+                        >>~ (report CardsRented)
                 
                 Actions.ensureOperationIsAllowed
                     config.transferCardsToMainAccount

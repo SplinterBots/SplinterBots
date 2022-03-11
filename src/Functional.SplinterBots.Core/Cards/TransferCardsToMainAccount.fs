@@ -17,7 +17,8 @@ module TransferCardsToMainAccount =
                     |> Seq.map (fun cards -> cards.uid)
                     |> IdConverter.bindMultipleCardsId
             
-                Cards.sentCards cardsToTransfer context.destinationAccount playerName context.activeKey
+                Cards.sentCards cardsToTransfer context.destinationAccount playerName context.activeKey 
+                |> ignore
 
             return context
         }   
