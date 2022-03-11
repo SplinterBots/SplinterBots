@@ -40,7 +40,7 @@ module RentCardsWithDec =
             let! details = Player.Details.getDetails playerName
             let power = details.collection_power
 
-            if power <= desiredPowerLimit
+            if power < desiredPowerLimit
             then
                 let! transactionResult = rentCard playerName activeKey
                 
