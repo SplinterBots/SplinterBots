@@ -35,7 +35,7 @@ type BackgroundWorker () =
                             do! SplinterBots.claimDaily logToObserver getToken config 
                             ApplicationUpdater.checkForUpdates ()
                     with 
-                    | :? System.Exception as exn -> 
+                    |  :? System.Exception as exn -> 
                         ()
             })
     member this.Subscribe onNext =

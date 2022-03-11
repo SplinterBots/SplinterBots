@@ -3,7 +3,6 @@
 module RentSelectedCards =
     open Functional.SplinterBots.API
     open Functional.SplinterBots.API.Market
-    open Functional.SplinterBots.API.Player.Balance
     open Functional.SplinterBots.ExecutionContext
 
     [<Literal>]
