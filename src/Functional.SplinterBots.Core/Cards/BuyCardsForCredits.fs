@@ -24,7 +24,7 @@ module BuyForCredits =
                     | Some card ->
                         let playerName = context.playerName
                         let activekey = context.activeKey
-                        Market.buyCard card Currency.CREDITS playerName activekey
+                        Market.buyCard card Currency.CREDITS playerName activekey |> ignore
                     | None ->
                         ()
                 | _ ->

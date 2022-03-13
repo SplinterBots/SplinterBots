@@ -5,10 +5,17 @@ open Functional.SplinterBots
 
 type BotsWindow (usernames) as self =
     inherit Window()
-
-    let statusControl = createLabel ""
-    let currentUser = createLabel ""
-    let mode = createLabel ""
+    
+    let startClaimProcesButton = 
+        createButton "Start claim process"
+        |> abstractPosition 1 0
+    let configuration =
+        createButton "Configuration"
+        |> moveToRight startClaimProcesButton
+    let exit =
+        createButton "Exit"
+        |> moveToRight configuration
+        
     let scroll = 
         createScrollView 100 6
         |> abstractPosition 0 1
@@ -30,19 +37,20 @@ type BotsWindow (usernames) as self =
         bots.[username].SetLoading ()
     let enableProcessed username =
         bots.[username].FinishedProcessing ()
-    let setMode text = 
-        mode.Text <- ustr (text.ToString()) 
     let updateStatus username status =
         bots.[username].UpdateProgress status
-    let setCurrentUser username =
-        currentUser.Text <- ustr username
+
     do
         let controls =
             bots.Values
             |> Seq.map (fun bot -> bot)
             |> Seq.cast<View>
             |> Array.ofSeq
+        
         scroll.Add controls
+        self.Add startClaimProcesButton
+        self.Add configuration 
+        self.Add exit 
         self.Add scroll
         
     member this.UpdateStatus status =
@@ -53,7 +61,6 @@ type BotsWindow (usernames) as self =
             | StartedProcessing username -> 
                 indicateLoading username
                 updateStatus user "Starting Loading"
-            | Mode x -> setMode x
             | LoadedAccountDetails details -> 
                 setAccountDetails details
                 updateStatus user "seting account details"
@@ -68,3 +75,16 @@ type BotsWindow (usernames) as self =
             | _ -> 
                 updateStatus user status
         }
+
+    member this.SetClaimAction action = 
+        startClaimProcesButton 
+        |> addClick action
+        |> ignore
+    member this.SetConfigurationAction action = 
+        configuration
+        |> addClick action
+        |> ignore
+    member this.SetExitAction action = 
+        exit
+        |> addClick action
+        |> ignore

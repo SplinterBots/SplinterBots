@@ -32,11 +32,11 @@ let handle =
         saveButton 
         |> addClick (save >> closeWindow)  
         |> setDefaultButton 
-        |> keepAtLine 8)
+        |> moveToFixedLine 8)
     window.Add (
         closeButton 
         |> addClick closeWindow 
-        |> keepAtLine 8
+        |> moveToFixedLine 8
         |> moveToRight saveButton)
 
     window
