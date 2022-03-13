@@ -43,6 +43,18 @@ let publishOptions (options: DotNet.PublishOptions) =
             Runtime = Some runtime;
             Configuration = DotNet.BuildConfiguration.Release;
             SelfContained = Some true;
+            //VersionSuffix = Some version;
+            MSBuildParams =
+                { options.MSBuildParams with
+                    Properties = [
+                        "PublishTrimmed", "true"
+                        "EnableCompressionInSingleFileEnableCompressionInSingleFile", "true"
+                        "PublishSingleFile", "true"
+                        "IncludeNativeLibrariesForSelfExtract", "true"
+                        "PublishReadyToRun", "true"
+                        "TrimMode", "Link"
+                    ]
+                }
     }
 Target.create "PublishDotnet" (fun _ ->
     !! "src/*.App/*.*proj"
