@@ -3,6 +3,8 @@ claimSeasonReward: true
 
 rentCards: true
 
+transferCardsToMainAccount: true
+
 desiredLeague: 1
 
 timers:

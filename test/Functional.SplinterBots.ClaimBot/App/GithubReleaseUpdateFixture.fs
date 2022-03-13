@@ -48,6 +48,5 @@ module GithubReleaseUpdateFixture =
 
             let! release  = GitHubReleaseUpdate.getLatestGithubVersion ()
             let asset = GitHubReleaseUpdate.getProperAssetUrl release.Value
-            asset
-            |> should not' (equal GitHubReleaseUpdate.notSupported)
+            asset |> should not' (equal GitHubReleaseUpdate.notSupported)
         }

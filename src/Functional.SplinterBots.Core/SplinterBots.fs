@@ -6,6 +6,7 @@ module SplinterBots =
     open Actions
 
     let getAccountDetails log getToken config =
+        let report = Messages.report log
         let getAccountDetail  =
             [
                 Messages.reportStartProcessing log
@@ -16,13 +17,13 @@ module SplinterBots =
                 Splinterland.settings
                 AccountDetails.getAccountDetails
 
-                Messages.report log ClaimDailyReward
+                report ClaimDailyReward
                 Actions.ensureOperationIsAllowed
                     config.claimDailyReward
                     Rewards.claimDailyChest
                         >>~ (Messages.reportDailyChestRewards log)
 
-                Messages.report log ClaimSeasonReward
+                report ClaimSeasonReward
                 Actions.ensureOperationIsAllowed
                     config.claimSeasonReward
                     Rewards.claimSeasonChests
@@ -31,10 +32,15 @@ module SplinterBots =
                 Actions.ensureOperationIsAllowed
                     config.rentCards
                     (Cards.RentSelectedCards.rentCardsSelectedByUser config.cards)
-                        >>~ (Messages.report log RentingCardsToFillPower)
-                        >>~ (Messages.report log RentingCardsToFillPower)
+                        >>~ (report RentingCardsToFillPower)
+                        >>~ (report RentingCardsToFillPower)
                         >>~ (Cards.RentCardsWithDec.rentCardsToReachPower (config.desiredLeague |> SplinterlandLeague.leaugeToPower))
-                        >>~ (Messages.report log CardsRented)
+                        >>~ (report CardsRented)
+                
+                Actions.ensureOperationIsAllowed
+                    config.transferCardsToMainAccount
+                    (report TransferCardsToMainAccount)
+                        >>~ (Cards.TransferCardsToMainAccount.sentCardsToMainAccount)
                 
                 Splinterland.settings
                 AccountDetails.getAccountDetails
@@ -44,6 +50,7 @@ module SplinterBots =
         Actions.executeActions log getToken config getAccountDetail
 
     let claimDaily log getToken config =
+        let report = Messages.report log
         let getAccountDetail  =
             [
                 Messages.reportStartProcessing log
@@ -54,19 +61,19 @@ module SplinterBots =
                 Splinterland.settings
                 AccountDetails.getAccountDetails
 
-                Messages.report log DonateDec
+                report DonateDec
                 DEC.donateDec
                 Messages.reportLastTransfer log DecDonated
                 DEC.transferDecToMainAccount config.decLimit
                 Messages.reportLastTransfer log DecTransfered
 
-                Messages.report log BuyCardWithCredtis
+                report BuyCardWithCredtis
                 Cards.BuyForCredits.buyCheapestCardOnMarketWithCredits
 
-                Messages.report log ClaimSPS
+                report ClaimSPS
                 SPS.claimSps
                 AccountDetails.getAccountDetails
-                Messages.report log DonateSps
+                report DonateSps
                 SPS.donateSps
                 Messages.reportLastTransfer log SpsDonated
                 SPS.transferSPSToMainAccount

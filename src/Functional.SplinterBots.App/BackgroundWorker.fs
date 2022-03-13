@@ -3,13 +3,9 @@
 open System
 open Functional.SplinterBots
 open System.Reactive
-open System.Reactive.Linq
-open System.Reactive.Subjects
-open System.Collections.ObjectModel
-open FSharp.Control.Reactive
 
 type StatusObserver = IObserver<Async<string * SplinterlandStatus>>
-type StatusList = System.Collections.Generic.List<StatusObserver>
+type StatusList = Collections.Generic.List<StatusObserver>
 
 type Unsubscriber (observers: StatusList, observer: StatusObserver) = 
     interface IDisposable with 
@@ -39,7 +35,7 @@ type BackgroundWorker () =
                             do! SplinterBots.claimDaily logToObserver getToken config 
                             ApplicationUpdater.checkForUpdates ()
                     with 
-                    | :? System.Exception as exn -> 
+                    |  :? System.Exception as exn -> 
                         ()
             })
     member this.Subscribe onNext =

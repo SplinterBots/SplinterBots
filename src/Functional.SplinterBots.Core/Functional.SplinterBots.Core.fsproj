@@ -20,6 +20,7 @@
         <Compile Include="Cards\BuyCardsForCredits.fs" />
         <Compile Include="Cards\RentSelectedCards.fs" />
         <Compile Include="Cards\RentCardsWithDec.fs" />
+        <Compile Include="Cards\TransferCardsToMainAccount.fs" />
         <Compile Include="AccountDetails.fs" />
         <Compile Include="Rewards.fs" />
         <Compile Include="SplinterBots.Actions.fs" />
@@ -29,15 +30,14 @@
 
     <ItemGroup>
         <PackageReference Include="FSharp.Json" Version="0.4.1" />
-        <PackageReference Include="Functional.SplinterBots.API" Version="1.0.2" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
-        <PackageReference Include="NetEscapades.Configuration.Yaml" Version="2.1.0" />
-        <PackageReference Include="Functional.SplinterBots.API" Version="1.1.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+        <PackageReference Include="NetEscapades.Configuration.Yaml" Version="2.2.0" />
+        <PackageReference Include="Functional.SplinterBots.API" Version="1.4.0" />
     </ItemGroup>
 
     <ItemGroup>

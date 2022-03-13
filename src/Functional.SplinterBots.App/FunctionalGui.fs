@@ -27,7 +27,8 @@ module Position =
         view.X <- Pos.At x
         view.Y <- Pos.At y
         view
-    let moveToCenter (view: #View) =
+
+    let center (view: #View) =
         view.X <- Pos.Center()
         view
     let moveToRight parent (view: #View) =
@@ -36,18 +37,18 @@ module Position =
     let moveToLeft parent (view: #View) =
         view.X <- Pos.Left parent
         view
-    let moveToBottom parent (view: #View) =
-        view.X <- Pos.Bottom parent
-        view
+    //let moveToBottom parent (view: #View) =
+    //    view.X <- Pos.Bottom parent
+    //    view
     let moveTo positionX  (view: #View) =
         view.X <- Pos.At positionX
         view
         
-    let keepAtLine positionY (view: #View) =
+    let moveToFixedLine positionY (view: #View) =
         view.Y <- Pos.At positionY
         view
         
-    let keepAtBottom parent (view: #View) =
+    let moveBelow parent (view: #View) =
         view.Y <- Pos.Bottom parent
         view
 

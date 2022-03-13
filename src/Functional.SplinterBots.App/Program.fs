@@ -5,6 +5,7 @@ open Functional.SplinterBots.Cards
 open Functional.SplinterBots.Config
 open Functional.SplinterBots.Storage.WatchMessages
 open System.Diagnostics
+open BotsWindow
 
 let getUsername (config: SplinterBotsCofig) =
     config.transferDetails
@@ -27,32 +28,26 @@ let Main () =
         Application.Init()
 
         let worker = BackgroundWorker.BackgroundWorker()
-
-        let botWindow = new BotsWindow.BotsWindow (getUsername config)
+        let botWindow = new BotsWindow (getUsername config)
         let configWindow = new ConfigurationWindow.ConfigurationWindow ()
-        //let cardsWindow = new CardsWindow.CardsWindow ()
+        let top = Application.Top
 
+        botWindow.SetClaimAction worker.ResponseToClaimProcessRequest 
+        botWindow.SetConfigurationAction configWindow.Show
+        botWindow.SetExitAction (fun () -> top.Running <- false)
+        
         let timer = Top.addTimeout schedulerTime worker.Scheduler
         use obseravableSubscrition = worker.Subscribe botWindow.UpdateStatus
         use databaseObserver = worker.Subscribe saveMessagesToDatabase
-        let top = Application.Top
-        let statusBar =
-            Toolbars.statusBar
-                configWindow.Show
-                configWindow.Show
-                //cardsWindow.Show
-                worker.ResponseToClaimProcessRequest
 
         top.Add botWindow
-        top.Add (Toolbars.menu configWindow.Show, statusBar)
-
+        
         worker.ResponseToDetailsProcessRequest ()
-
         Application.Run ()
         0
     with
         | :? NullReferenceException -> 1
-        | :? System.Exception as exp  -> 2
+        | :? Exception -> 2
 
 module SplinterBotsApp =
     [<EntryPoint>]
