@@ -11,9 +11,6 @@
     <Compile Include="ResourceLoader.fs" />
     <Compile Include="FSHttpMock.fs" />
     <Compile Include="SplinterBotsMathFixture.fs" />
-    <EmbeddedResource Include="Core\Cards\Cards.json" />
-    <Compile Include="Core\Cards\CardsFixture.fs" />
-    <Compile Include="App\GithubReleaseUpdateFixture.fs" />
     <None Include="Program.fs" />
   </ItemGroup>
 
