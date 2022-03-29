@@ -85,3 +85,22 @@ module SplinterBots =
                 Messages.reportFinishProcessing log
             ]
         Actions.executeActions log getToken config getAccountDetail
+
+    let playBattle log getToken config =
+        let report = Messages.report log
+        let getAccountDetail  =
+            [
+                Messages.reportStartProcessing log
+                Splinterland.updateToken
+                Messages.reportSplinterlandToken log
+                Splinterland.settings
+                AccountDetails.getAccountDetails
+
+                Battle.playBattle
+
+                Splinterland.settings
+                AccountDetails.getAccountDetails
+                Messages.reportAccountDetailas log
+                Messages.reportFinishProcessing log
+            ]
+        Actions.executeActions log getToken config getAccountDetail

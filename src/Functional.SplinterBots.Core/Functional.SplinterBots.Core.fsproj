@@ -21,6 +21,7 @@
         <Compile Include="Cards\RentSelectedCards.fs" />
         <Compile Include="Cards\RentCardsWithDec.fs" />
         <Compile Include="Cards\TransferCardsToMainAccount.fs" />
+        <Compile Include="Battle.fs" />
         <Compile Include="AccountDetails.fs" />
         <Compile Include="Rewards.fs" />
         <Compile Include="SplinterBots.Actions.fs" />

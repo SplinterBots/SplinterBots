@@ -32,6 +32,7 @@ let Main () =
         let configWindow = new ConfigurationWindow.ConfigurationWindow ()
         let top = Application.Top
 
+        botWindow.SetFightAction worker.ResponseToFightProcessRequest
         botWindow.SetClaimAction worker.ResponseToClaimProcessRequest 
         botWindow.SetConfigurationAction configWindow.Show
         botWindow.SetExitAction (fun () -> top.Running <- false)
@@ -42,7 +43,7 @@ let Main () =
 
         top.Add botWindow
         
-        worker.ResponseToDetailsProcessRequest ()
+        //worker.ResponseToDetailsProcessRequest ()
         Application.Run ()
         0
     with

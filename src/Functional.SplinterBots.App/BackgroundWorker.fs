@@ -34,6 +34,8 @@ type BackgroundWorker () =
                         | ExecutionModes.Claim -> 
                             do! SplinterBots.claimDaily logToObserver getToken config 
                             ApplicationUpdater.checkForUpdates ()
+                        | ExecutionModes.Fight -> 
+                            do! SplinterBots.playBattle logToObserver getToken config 
                     with 
                     |  :? System.Exception as exn -> 
                         ()
@@ -63,5 +65,9 @@ type BackgroundWorker () =
     member this.ResponseToClaimProcessRequest () =
         processor.Post ExecutionModes.Claim
     
+    member this.ResponseToFightProcessRequest () =
+        processor.Post ExecutionModes.Fight
+    
+
     member this.ResponseToDetailsProcessRequest () =
         processor.Post ExecutionModes.CheckDetails

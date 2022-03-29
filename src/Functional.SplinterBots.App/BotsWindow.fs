@@ -6,9 +6,12 @@ open Functional.SplinterBots
 type BotsWindow (usernames) as self =
     inherit Window()
     
+    let fightButton = 
+        createButton "Fight"
+        |> abstractPosition 1 0
     let startClaimProcesButton = 
         createButton "Start claim process"
-        |> abstractPosition 1 0
+        |> moveToRight fightButton
     let configuration =
         createButton "Configuration"
         |> moveToRight startClaimProcesButton
@@ -48,6 +51,7 @@ type BotsWindow (usernames) as self =
             |> Array.ofSeq
         
         scroll.Add controls
+        self.Add fightButton
         self.Add startClaimProcesButton
         self.Add configuration 
         self.Add exit 
@@ -76,6 +80,10 @@ type BotsWindow (usernames) as self =
                 updateStatus user status
         }
 
+    member this.SetFightAction action = 
+        fightButton
+        |> addClick action
+        |> ignore
     member this.SetClaimAction action = 
         startClaimProcesButton 
         |> addClick action
