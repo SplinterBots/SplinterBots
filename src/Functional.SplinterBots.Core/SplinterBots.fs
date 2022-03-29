@@ -55,6 +55,9 @@ module SplinterBots =
             [
                 Messages.reportStartProcessing log
 
+                report ClaimSPS
+                SPS.claimSps
+
                 Splinterland.updateToken
                 Messages.reportSplinterlandToken log
 
@@ -72,12 +75,10 @@ module SplinterBots =
                     Cards.BuyForCredits.buyCheapestCardOnMarketWithCredits
                         >>~ (report BuyCardWithCredtis)
 
-                report ClaimSPS
-                SPS.claimSps
-                AccountDetails.getAccountDetails
                 report DonateSps
                 SPS.donateSps
                 Messages.reportLastTransfer log SpsDonated
+                AccountDetails.getAccountDetails
                 SPS.transferSPSToMainAccount
                 Messages.reportLastTransfer log SpsTransfered
 
