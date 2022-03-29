@@ -45,6 +45,7 @@ module Config =
             claimDailyReward: bool
             claimSeasonReward: bool            
             rentCards: bool
+            buyCardWithCredits: bool
             transferCardsToMainAccount: bool
             desiredLeague: SplinterlandLeague
             transferDetails: TransferDetails array
@@ -87,6 +88,7 @@ module Config =
                     claimDailyReward = config.GetValue<bool> "claimDailyReward" 
                     claimSeasonReward = config.GetValue<bool> "claimSeasonReward"
                     rentCards = config.GetValue<bool> "rentCards"
+                    buyCardWithCredits = config.GetValue<bool> "buyCardWithCredits"
                     transferCardsToMainAccount = config.GetValue<bool> "transferCardsToMainAccount"
                     desiredLeague = config.GetValue<SplinterlandLeague> "desiredLeague"
                     parallelExecution = config.GetValue<int> "parallelExecution"

@@ -13,6 +13,7 @@ type ConfigurationWindow () as self =
 
     let claimDailyRewardCheckbox = createCheckBox "Claim _Daily Reward"
     let claimSessonalRewardCheckbox = createCheckBox "Claim S_esonal Reward"
+    let buyCardsWithCredit = createCheckBox "Buy cards with crediits"
     let transferCardsCheckbox = createCheckBox "_Transafer Cards"
     let rentCardsCheckbox = createCheckBox "_Rent card to reach bronze 2"
     let startTransferTime = createTimeField ()
@@ -31,6 +32,7 @@ type ConfigurationWindow () as self =
         configFile.claimDailyReward <- claimDailyRewardCheckbox.Checked
         configFile.claimSeasonReward <- claimSessonalRewardCheckbox.Checked
         configFile.rentCards <- rentCardsCheckbox.Checked
+        configFile.buyCardWithCredits <- buyCardsWithCredit.Checked
         configFile.transferCardsToMainAccount <- transferCardsCheckbox.Checked
         let executionTime = startTransferTime.Time
         configFile.timers.executeTransfer <- $"{executionTime.Minutes} {executionTime.Hours} * * *"
@@ -47,28 +49,28 @@ type ConfigurationWindow () as self =
 
     do 
         self.Add (claimDailyRewardCheckbox |> moveToFixedLine 0)
-        self.Add (claimSessonalRewardCheckbox |> moveToFixedLine 1)
-        self.Add (transferCardsCheckbox |> moveToFixedLine 2)
-        self.Add (rentCardsCheckbox |> moveToFixedLine 3)
+        self.Add (claimSessonalRewardCheckbox |> moveBelow claimDailyRewardCheckbox)
+        self.Add (transferCardsCheckbox |> moveBelow claimSessonalRewardCheckbox )
+        self.Add (rentCardsCheckbox |> moveBelow transferCardsCheckbox)
         self.Add (
             createLabel "Set start time of resources transfer:" 
-            |> moveToFixedLine 4 
+            |> moveBelow rentCardsCheckbox
             |> moveTo 15)
-        self.Add (startTransferTime |> moveToFixedLine 4)
+        self.Add (startTransferTime |> moveBelow rentCardsCheckbox)
         self.Add decLimit
         self.Add (
             createLabel "Transfer DEC above this limit" 
-            |> moveToFixedLine 5 
+            |> moveBelow startTransferTime
             |> moveTo 15)
         self.Add (
             saveButton 
             |> addClick (save >> closeWindow)  
             |> setDefaultButton 
-            |> moveToFixedLine 8)
+            |> moveBelow startTransferTime)
         self.Add (
             closeButton 
             |> addClick closeWindow 
-            |> moveToFixedLine 8
+            |> moveBelow startTransferTime
             |> moveToRight saveButton)
 
     member this.Show () =
@@ -77,6 +79,7 @@ type ConfigurationWindow () as self =
         claimDailyRewardCheckbox |> setState config.claimDailyReward |> ignore
         claimSessonalRewardCheckbox |> setState config.claimSeasonReward |> ignore
         rentCardsCheckbox |> setState config.rentCards |> ignore
+        buyCardsWithCredit |> setState config.buyCardWithCredits |> ignore
         transferCardsCheckbox |> setState config.transferCardsToMainAccount |> ignore
         startTransferTime |> setTime (cronToTimeSpan config.timers.executeTransfer) |> ignore
         decLimit |> setText config.decLimit |> ignore

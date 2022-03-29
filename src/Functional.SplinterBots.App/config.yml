@@ -1,6 +1,9 @@
 ﻿claimDailyReward: false
 claimSeasonReward: false
+
 rentCards: false
+buyCardWithCredits: false
+
 transferCardsToMainAccount: true
 
 desiredLeague: 1

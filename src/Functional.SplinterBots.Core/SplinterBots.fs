@@ -67,8 +67,10 @@ module SplinterBots =
                 DEC.transferDecToMainAccount config.decLimit
                 Messages.reportLastTransfer log DecTransfered
 
-                report BuyCardWithCredtis
-                Cards.BuyForCredits.buyCheapestCardOnMarketWithCredits
+                Actions.ensureOperationIsAllowed
+                    config.buyCardWithCredits
+                    Cards.BuyForCredits.buyCheapestCardOnMarketWithCredits
+                        >>~ (report BuyCardWithCredtis)
 
                 report ClaimSPS
                 SPS.claimSps
