@@ -40,7 +40,7 @@
         <PackageReference Include="Cronos" Version="0.7.1" />
         <PackageReference Include="FSharp.Configuration" Version="2.0.0" />
         <PackageReference Include="FSharp.Control.Reactive" Version="5.0.2" />
-        <PackageReference Include="Functional.SplinterBots.API" Version="1.4.0" />
+        <PackageReference Include="Functional.SplinterBots.API" Version="1.8.11" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="6.0.0" />

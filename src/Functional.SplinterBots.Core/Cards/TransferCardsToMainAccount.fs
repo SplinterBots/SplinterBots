@@ -8,7 +8,7 @@ module TransferCardsToMainAccount =
     let sentCardsToMainAccount (context: Context) =
         async {
             let playerName = context.playerName
-            let! playerCollection = Cards.getPlayerCollection playerName
+            let! playerCollection = Cards.getAvailableCardsForPlayer playerName
             let playerCollection  = playerCollection |> Cards.filterCardsByOwningPlayer playerName
             if( Seq.length playerCollection > 0)
             then 
