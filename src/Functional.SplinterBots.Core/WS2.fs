@@ -108,9 +108,10 @@ module WebSocket2 =
 
         member this.WaitForGamesState state = 
             waitForGameState state 10
-
+            ()
         member this.WaitForTransaction transactionId = 
             waitForTransaction transactionId 10
+            ()
 
         member this.GetState state =
             getState state

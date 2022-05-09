@@ -30,7 +30,7 @@ module Battle =
                     json payload
                 }
         
-            let test = response |> toString Int32.MaxValue
+            let test = response |> toString Int32.MaxValue 
             let! responseStream =  response |> toStreamAsync
             return! JsonSerializer.DeserializeAsync<'T>(responseStream).AsTask() |> Async.AwaitTask 
         }
@@ -46,15 +46,13 @@ module Battle =
            (postingKey: PostingKey) =
        async {
            let! transaction = startFight username postingKey
-           let transactionFound = webSocket.WaitForTransaction transaction.id
-           let matchFound = webSocket.WaitForGamesState GameState.match_found 
-
-           Thread.Sleep (2000)
+           webSocket.WaitForTransaction transaction.id
+           webSocket.WaitForGamesState GameState.match_found 
 
            let matchDetails = webSocket.GetState GameState.match_found |> MatchDetails.bind
            let! team = getTeam matchDetails
 
-           do! (Task.Delay 8000 |> Async.AwaitTask)
+           do! (Task.Delay 5000 |> Async.AwaitTask)
 
            let! submitedTeam = submitTeam transaction team
            let _ = webSocket.WaitForTransaction submitedTeam.id
@@ -99,27 +97,10 @@ module Battle =
 
             return Team(summonerCard, monsters)
         }
-    let teamHash (team: Team) =
-        let monstersString = 
-            team.Team
-            |> Seq.map (fun monster -> monster.card_long_id)
-            |> String.concat ","
-        let toHash = 
-            sprintf "%s,%s,%s"
-                team.Summoner.card_long_id
-                monstersString
-                team.Secret
-        generateMD5Hash toHash
     let submitTeam (botinstance: UltimateBot) (transaction: Transaction) (team: Team) = 
         async {
-            //let hash1 = botinstance.TeamHash team
-            let hash2 = teamHash team
-            let! (_, transaction, _) = botinstance.SubmitTeamAsync(transaction.id, team) |> Async.AwaitTask
-            return 
-                {
-                    id = "test"
-                    success = true
-                }
+            let! transaction = botinstance.SubmitTeamAsync(transaction.id, team) |> Async.AwaitTask
+            return transaction |> Transaction.bind
         }
     let revealTeam (botinstance: UltimateBot) (transaction: Transaction) (team: Team) = 
         async {
