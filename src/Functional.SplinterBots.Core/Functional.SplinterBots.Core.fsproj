@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="WS2.fs" />
         <Compile Include="Version.fs" />
         <Compile Include="GitHubReleaseUpdate.fs" />
         <Compile Include="Status.fs" />
@@ -31,7 +32,7 @@
 
     <ItemGroup>
         <PackageReference Include="FSharp.Json" Version="0.4.1" />
-        <PackageReference Include="Functional.SplinterBots.BattleAPI" Version="1.8.11" />
+        <PackageReference Include="Functional.SplinterBots.BattleAPI" Version="1.8.17" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="6.0.0" />
@@ -39,7 +40,7 @@
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
         <PackageReference Include="NetEscapades.Configuration.Yaml" Version="2.2.0" />
-        <PackageReference Include="Functional.SplinterBots.API" Version="1.8.11" />
+        <PackageReference Include="Functional.SplinterBots.API" Version="1.8.17" />
     </ItemGroup>
 
     <ItemGroup>
