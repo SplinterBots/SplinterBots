@@ -16,6 +16,7 @@ open FsHttp.Response
 open System.Text.Json
 open System
 open System.Threading
+open System.Net
 
 module Battle =
 
@@ -35,7 +36,6 @@ module Battle =
             return! JsonSerializer.DeserializeAsync<'T>(responseStream).AsTask() |> Async.AwaitTask 
         }
     
-    let mutable jTeam = JToken.Parse("")
     let fight2 
            (startFight: StartFight) 
            (getTeam: GetTeam) 
@@ -58,7 +58,8 @@ module Battle =
            let _ = webSocket.WaitForTransaction submitedTeam.id
 
            let! revealedTeam = revealTeam transaction team
-           ()
+
+           webSocket.WaitForGamesState GameState.opponent_submit_team
        }
 
     let startNewMatch2 username postingkey =
@@ -97,20 +98,43 @@ module Battle =
 
             return Team(summonerCard, monsters)
         }
-    let submitTeam (botinstance: UltimateBot) (transaction: Transaction) (team: Team) = 
+    let submitTeam username postingKey (transaction: Transaction) (team: Team) = 
         async {
-            let! transaction = botinstance.SubmitTeamAsync(transaction.id, team) |> Async.AwaitTask
-            return transaction |> Transaction.bind
+            let json = 
+                sprintf "{\"trx_id\":\"%s\",\"team_hash\":\"%s\",\"app\":\"%s\",\"n\":\"%s\"}"
+                    transaction.id
+                    team.TeamHash
+
+            let custom_Json = API.createCustomJsonPostingKey username "sm_submit_team" json
+            let oTransaction = API.hive.create_transaction([| custom_Json |], [| postingKey |])
+
+            let postData = Generator.getStringForSplinterlandsAPI oTransaction
+            
+            let battleUrl = "https://battle.splinterlands.com/battle/battle_tx"
+            let! response = executeApiPostCall2<Transaction> battleUrl postData
+            return response
+
         }
-    let revealTeam (botinstance: UltimateBot) (transaction: Transaction) (team: Team) = 
+    let revealTeam username postingKey (transaction: Transaction) (team: Team) = 
         async {
-            botinstance.RevealTeam(transaction.id, team)
-            let transaction = 
-                {
-                    id = "test"
-                    success = true
-                }
-            return transaction
+            let monsters = 
+                team.Team
+                |> Seq.map (fun monster -> monster.card_long_id)
+                |> Seq.map (sprintf "\"%s\"")
+                |> String.concat ","
+            let json = 
+                sprintf "{\"trx_id\":\"%s\",\"summoner\":\"%s\",\"monsters\":[%s],\"secret\":\"%s\",\"app\":\"%s\",\"n\":\"%s\"}"
+                    transaction.id
+                    team.Summoner.card_long_id
+                    monsters
+                    team.Secret
+
+            let custom_Json = API.createCustomJsonPostingKey username "sm_team_reveal" json
+            let oTransaction = API.hive.create_transaction([| custom_Json |], [| postingKey |])
+            let postData = Generator.getStringForSplinterlandsAPI oTransaction
+            
+            let battleUrl = "https://battle.splinterlands.com/battle/battle_tx"
+            do! executeApiPostCall2<Transaction> battleUrl postData |> ignore
         }
 
     let playBattle(context: Context) =
@@ -124,6 +148,6 @@ module Battle =
             do! socket.Start ()
             let! cards = SplinterlandsAPI.GetPlayerCardsAsync(username) |> Async.AwaitTask
             let bot = new UltimateBot(username, postingKey, cards)
-            do! fight2 startNewMatch2 (getTeam username cards) (submitTeam bot) (revealTeam bot) socket username postingKey 
+            do! fight2 startNewMatch2 (getTeam username cards) (submitTeam username postingKey) (revealTeam username postingKey) socket username postingKey 
             return context
         }
