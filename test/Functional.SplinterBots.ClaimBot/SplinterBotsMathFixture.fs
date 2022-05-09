@@ -46,17 +46,20 @@ module SplinterBotsMathFixture =
 
     let spsValues : obj[] seq =
         seq {
-            yield [| 0.09; None |]
-            yield [| 0.1; Some 0.05M |]
-            yield [| 0.5; Some 0.05M |]
-            yield [| 1; Some 0.05M |]
-            yield [| 4; Some 0.2M|]
-            yield [| 8; Some 0.4M|]
-            yield [| 12; Some 0.6M|]
-            yield [| 16; Some 0.8M|]
-            yield [| 21; Some 1.05M|]
-            yield [| 30; Some 1.5M|]
-
+            yield [| 0.001; None |]
+            yield [| 0.002; Some 0.001M |]
+            yield [| 0.005; Some 0.001M |]
+            yield [| 0.009; Some 0.001M |]
+            yield [| 0.01; Some 0.001M |]
+            yield [| 0.1; Some 0.005M |]
+            yield [| 0.5; Some 0.025m |]
+            yield [| 1; Some 0.05m |]
+            yield [| 4; Some 0.2m|]
+            yield [| 8; Some 0.4m|]
+            yield [| 12; Some 0.6m|]
+            yield [| 16; Some 0.8m|]
+            yield [| 21; Some 1.05m|]
+            yield [| 30; Some 1.5m|]
         }
     [<Theory>]
     [<MemberData("spsValues")>]

@@ -1,16 +1,15 @@
-﻿claimDailyReward: true
-claimSeasonReward: true
+﻿claimDailyReward: false
+claimSeasonReward: false
 
-rentCards: true
+rentCards: false
+buyCardWithCredits: false
 
 transferCardsToMainAccount: true
 
 desiredLeague: 1
+decLimit: 100.000
+parallelExecution: 1
 
 timers:
   executeTransfer: "00 18 * * *"
   checkStatus: "*/10 * * * *"
-
-decLimit: 100.000
-
-parallelExecution: 1

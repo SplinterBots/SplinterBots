@@ -44,9 +44,11 @@ module RentCardsWithDec =
             then
                 let! transactionResult = rentCard playerName activeKey
                 
-                if(transactionResult = TransactionResult.FinishedOk)
-                then
+                match transactionResult with 
+                | FinishedOk _ -> 
                     do! ensurePowerLimitIsReached desiredPowerLimit playerName activeKey
+                | _ -> 
+                    ()
             return ()
         }
 

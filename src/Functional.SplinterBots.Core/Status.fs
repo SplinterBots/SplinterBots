@@ -96,6 +96,7 @@ module Status =
     type ExecutionModes =
         | Claim
         | CheckDetails
+        | Fight
 
     type SplinterlandStatus =
         | Ignore

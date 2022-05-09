@@ -26,8 +26,8 @@ module SplinterBotsMath =
     let calcualteSPSDonation spsAmount =
         let spsAmount = spsAmount |> round
         match spsAmount with
-        | x when x < 0.1M -> None
-        | x when x <= 1M -> Some 0.05M
+        | x when x <= 0.001M -> None
+        | x when x <= 0.01M -> Some 0.001M
         | _ -> Some (spsAmount * 0.05M)
     let removeComma (input: string) =
         input.Replace(",", "")

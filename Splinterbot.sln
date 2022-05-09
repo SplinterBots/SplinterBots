@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{6BEC
 		.config\dotnet-tools.json = .config\dotnet-tools.json
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Functional.SplinterBots.Ultimate", "src\Functional.SplinterBots.Ultimate\Functional.SplinterBots.Ultimate.csproj", "{1F095A1D-D69D-4590-B4C0-0EE14A860580}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{740EEA38-0861-4C1B-8F58-E2DFBE9DC7B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{740EEA38-0861-4C1B-8F58-E2DFBE9DC7B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{740EEA38-0861-4C1B-8F58-E2DFBE9DC7B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F095A1D-D69D-4590-B4C0-0EE14A860580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F095A1D-D69D-4590-B4C0-0EE14A860580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F095A1D-D69D-4590-B4C0-0EE14A860580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F095A1D-D69D-4590-B4C0-0EE14A860580}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{2B993381-E13D-4163-BC26-38FD4B5F6CCB} = {54437566-C6E5-4F50-ABC0-8310C23E7347}
 		{740EEA38-0861-4C1B-8F58-E2DFBE9DC7B7} = {54437566-C6E5-4F50-ABC0-8310C23E7347}
 		{6BEC8DBE-2C67-4CE1-9041-9905C99182CB} = {E1873CD9-0E49-47E7-AB62-AD4695952FCD}
+		{1F095A1D-D69D-4590-B4C0-0EE14A860580} = {54437566-C6E5-4F50-ABC0-8310C23E7347}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C8989DB1-14F8-41EF-B8FC-B5DC625780BE}

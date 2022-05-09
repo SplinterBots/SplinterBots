@@ -13,7 +13,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-name: 2022.08.$(Rev:r)
+name: 2022.12.$(Rev:r)
 
 stages:
   - template: build.yml

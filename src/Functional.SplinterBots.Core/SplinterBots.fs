@@ -55,6 +55,9 @@ module SplinterBots =
             [
                 Messages.reportStartProcessing log
 
+                report ClaimSPS
+                SPS.claimSps
+
                 Splinterland.updateToken
                 Messages.reportSplinterlandToken log
 
@@ -67,17 +70,36 @@ module SplinterBots =
                 DEC.transferDecToMainAccount config.decLimit
                 Messages.reportLastTransfer log DecTransfered
 
-                report BuyCardWithCredtis
-                Cards.BuyForCredits.buyCheapestCardOnMarketWithCredits
+                Actions.ensureOperationIsAllowed
+                    config.buyCardWithCredits
+                    Cards.BuyForCredits.buyCheapestCardOnMarketWithCredits
+                        >>~ (report BuyCardWithCredtis)
 
-                report ClaimSPS
-                SPS.claimSps
-                AccountDetails.getAccountDetails
                 report DonateSps
                 SPS.donateSps
                 Messages.reportLastTransfer log SpsDonated
+                AccountDetails.getAccountDetails
                 SPS.transferSPSToMainAccount
                 Messages.reportLastTransfer log SpsTransfered
+
+                Splinterland.settings
+                AccountDetails.getAccountDetails
+                Messages.reportAccountDetailas log
+                Messages.reportFinishProcessing log
+            ]
+        Actions.executeActions log getToken config getAccountDetail
+
+    let playBattle log getToken config =
+        let report = Messages.report log
+        let getAccountDetail  =
+            [
+                Messages.reportStartProcessing log
+                Splinterland.updateToken
+                Messages.reportSplinterlandToken log
+                Splinterland.settings
+                AccountDetails.getAccountDetails
+
+                Battle.playBattle
 
                 Splinterland.settings
                 AccountDetails.getAccountDetails
